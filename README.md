@@ -4,7 +4,7 @@ This is the project page for our ICCV2019 paper: **Robust Multi-Modality Multi-O
 
 **Authors**: [Wenwei Zhang](http://zhangwenwei.cn), [Hui Zhou](https://scholar.google.com/citations?user=i35tdbMAAAAJ&hl=zh-CN), [Shuyang Sun](https://kevin-ssy.github.io/), [Zhe Wang](https://wang-zhe.me/), [Jianping Shi](http://shijianping.me/), [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/)
 
-[[arXiv]](https://arxiv.org/abs/1909.03850)&nbsp;  [[Project Page]](#)&nbsp;
+[[ArXiv]](https://arxiv.org/abs/1909.03850)&nbsp;  [[Project Page]](#)&nbsp;  [[Poster]](http://zhangwenwei.cn/files/mmMOT_poster_final.pdf)
 
 ## Introduction
 
