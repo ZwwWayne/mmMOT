@@ -45,7 +45,7 @@ python -u eval_seq.py --config ${work_path}/config.yaml \
 The `--result_sha` option is used to distinguish different evaluation attempts.
 You can also simply run command like
 ```
-sh ./experiments/pp_pv_40e_mul_A/eval.sh
+sh ./experiments/pp_pv_40e_mul_A/eval.sh ${partition}
 ```
 
 To train the model on your own, you can run command
@@ -55,7 +55,7 @@ python -u main.py --config ${work_path}/config.yaml \
 ```
 You can also simply run command like
 ```
-sh ./experiments/pp_pv_40e_mul_A/train.sh
+sh ./experiments/pp_pv_40e_mul_A/train.sh ${partition}
 ```
 
 **Note:** Both the train and eval scripts use srun as default, you can just comment them if you do not use srun.
@@ -84,13 +84,12 @@ The Fusion Module C++ indicates that it uses `absolute subtraction` and `softmax
 
 Currently it supports [PointPillar](https://github.com/nutonomy/second.pytorch)/[SECOND](https://github.com/traveller59/second.pytorch) detector, and also support [RRC-Net](https://github.com/xiaohaoChen/rrc_detection) detector.
 
-In the [paper](https://arxiv.org/abs/1909.03850), we train a [PointPillars](https://arxiv.org/abs/1812.05784) model to obtain the train/val detection results for ablation study, using the [official codebase](https://github.com/nutonomy/second.pytorch). The data are provided in the [google drive](https://drive.google.com/open?id=1IJ6rWSJw-BExQP-N25RNmQzUeTYSmwj6).
+In the [paper](https://arxiv.org/abs/1909.03850), we train a PointPillars model to obtain the train/val detection results for ablation study, using the [official codebase](https://github.com/nutonomy/second.pytorch). The detection data are provided in the [google drive](https://drive.google.com/open?id=1IJ6rWSJw-BExQP-N25RNmQzUeTYSmwj6). Once you download the two pkl files, put them in the `data` directory.
 
-The RRC detection are obtained from the [link](https://drive.google.com/file/d/1ZR1qEf2qjQYA9zALLl-ZXuWhqG9lxzsM/view) provided by [MOTBeyondPixels](https://github.com/JunaidCS032/MOTBeyondPixels). We use RRC detection for the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php).
-
-We provide the data split used in our paper in the `data` directory. You need to download and unzip the data from the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) and put them in the `kitti_t_o` directory or any path you like.
+We also provide the data split used in our paper in the `data` directory. You need to download and unzip the data from the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) and put them in the `kitti_t_o` directory or any path you like.
 Do remember to change the path in the configs.
 
+The RRC detection are obtained from the [link](https://drive.google.com/file/d/1ZR1qEf2qjQYA9zALLl-ZXuWhqG9lxzsM/view) provided by [MOTBeyondPixels](https://github.com/JunaidCS032/MOTBeyondPixels). We use RRC detection for the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php).
 
 
 ## Citation
