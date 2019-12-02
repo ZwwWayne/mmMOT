@@ -35,7 +35,7 @@ def main():
     args = parser.parse_args()
 
     with open(args.config) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
 
     config = EasyDict(config['common'])
     config.save_path = os.path.dirname(args.config)

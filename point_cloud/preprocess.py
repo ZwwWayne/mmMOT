@@ -46,7 +46,10 @@ def read_and_prep_points(info, root_path, point_path, dets, use_frustum=False,
     """read data from KITTI-format infos, then call prep function.
     """
     # read point cloud
+    point_path_split = point_path.split('-')
+    # v_path = f'{root_path}/velodyne/{point_path_split[0]}/{point_path_split[1]}'
     v_path = f'{root_path}/velodyne_reduced/{point_path}'
+    
     points = np.fromfile(
         str(v_path), dtype=np.float32,
         count=-1).reshape([-1, num_point_features])
