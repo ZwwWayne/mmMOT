@@ -42,10 +42,10 @@ Following the usage you can directly inference the model and get results as foll
 
 |    Name    |  Method  | MOTA |
 | :-----------: | :-----: | :--: |
-||Fusion Module A| 77.57|
-||Fusion Module B| 77.62|
-||Fusion Module C| 78.18|
-||Fusion Module C++| 80.08|
+|pp_pv_40e_mul_A|Fusion Module A| 77.57|
+|pp_pv_40e_mul_B|Fusion Module B| 77.62|
+|pp_pv_40e_mul_C|Fusion Module C| 78.18|
+|pp_pv_40e_dualadd_subabs_C|Fusion Module C++| 80.08|
 
 The results of Fusion Module A,B and C are the same as those in the Table 1 of the paper.
 The Fusion Module C++ indicates that it uses `absolute subtraction` and `softmax with addition` to improve the results, and has the same MOTA as that in the last row of Table 3 of the [paper](https://arxiv.org/abs/1909.03850).
