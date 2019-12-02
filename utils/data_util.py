@@ -520,10 +520,10 @@ def align_points(R, T, imu2velo, points):
     return velo_points
 
 
-# wgs84->utm，纵轴墨卡托投影变换
+# wgs84->utm，
 def proj_trans1(lon, lat):
-    p1 = pyproj.Proj(init="epsg:4326")  # 定义数据地理坐标系
-    p2 = pyproj.Proj(init="epsg:3857")  # 定义转换投影坐标系
+    p1 = pyproj.Proj("epsg:4326") 
+    p2 = pyproj.Proj("epsg:3857") 
 
     x1, y1 = p1(lon, lat)
     x2, y2 = pyproj.transform(p1, p2, x1, y1, radians=True)
@@ -531,7 +531,7 @@ def proj_trans1(lon, lat):
     return x2, y2
 
 
-# 获取3d旋转矩阵(3x3),rotate_order指定旋转次序（默认绕z,y,x）
+# get 3d rotation matrix (3x3),rotate_order（default: z,y,x）
 def get_rotate_mat(delta_rad, rotate_order=[3, 2, 1]):
     # rotate around x
     rx_cos = np.cos(delta_rad[0])
@@ -599,7 +599,7 @@ def add_miss_dets(prev_dets, dets, iou_threshold=0.2, fix_threshold=2):
     fix_count = torch.Tensor(prev_dets['fix_count'])
     mask = torch.Tensor(mat).sum(dim=-1).eq(0)
     fix_count += mask.float()
-    mask -= fix_count.gt(fix_threshold)
+    mask ^= fix_count.gt(fix_threshold)
     index = mask.nonzero().squeeze(0).numpy()
 
     if len(index) == 0:

@@ -1,3 +1,7 @@
 motmetrics
 PyYAML
 easydict
+munkres
+ortools
+pyproj
+opencv-python

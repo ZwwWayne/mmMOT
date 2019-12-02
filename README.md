@@ -14,21 +14,22 @@ For more details, please refer our [paper](https://arxiv.org/abs/1909.03850).
 
 ## Install
 
-This project is based on pytorch>=1.0, you can install it following the [official guide](https://pytorch.org/get-started/locally/), for example,
+This project is based on pytorch>=1.0, you can install it following the [official guide](https://pytorch.org/get-started/locally/).
 
+We recommand you to build a new conda environment to run the projects as follows:
 ```bash
+conda create -n mmmot python=3.7 cython
+conda activate mmmot
 conda install pytorch torchvision -c pytorch
-
+conda install numba
 ```
 
-Then follow the guide to install [py-motmetrics](https://github.com/cheind/py-motmetrics)
-Or you can directly run the following command to get all packages
-
+Then install packages from pip:
 ```bash
-conda install --file requirements.txt
+pip install -r requirements.txt
 ```
 
-Then follow the guide to install [SECOND](https://github.com/traveller59/second.pytorch), we use the same environment as that for SECOND.
+You can also follow the guide to install [SECOND](https://github.com/traveller59/second.pytorch), we use the same environment as that for SECOND.
 
 
 ## Usage
