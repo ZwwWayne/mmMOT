@@ -1,0 +1,78 @@
+common:
+    model:
+        point_arch: v1
+        point_len: 512
+        appear_arch: vgg
+        appear_len: 512
+        appear_skippool: True
+        appear_fpn: False
+
+        end_arch: v2
+        end_mode: avg
+
+        affinity_op: minus_abs # multiply or addminus
+        softmax_mode: dual_add
+
+        score_arch: branch_cls 
+        neg_threshold: 0.2
+
+        score_fusion_arch: C # A, B, C
+        test_mode: 2 #0:image;1:LiDAR;2:fusion
+    
+    gt_det_ratio : 0
+    sample_max_len : 2
+    det_type: 3D
+    tracker_type: 3D
+    use_frustum: False
+    without_reflectivity: True
+    train_fix_iou: 1
+    train_fix_count: 0
+    val_fix_iou: 1
+    val_fix_count: 0
+    use_dropout: False
+    dropblock: 0
+
+    augmentation:
+        input_size: 224
+        test_resize: 224
+
+    loss:
+        det_loss: bce
+        link_loss: l2
+        smooth_ratio: 0
+        det_ratio: 1.5
+        trans_ratio: 0.001
+        trans_last: True
+
+    workers: 1
+    batch_size: 1
+    lr_scheduler:
+        #type: COSINE
+        optim: Adam
+        type: one_cycle
+        base_lr: 0.0003
+        lr_max: 0.0006
+        moms: [0.95, 0.85]
+        div_factor: 10.0
+        pct_start: 0.4
+        max_iter: 134200 # 40 * 3355
+
+    fixed_wd: true
+    use_moving_average: false
+    momentum: 0.9
+    #weight_decay: 0.0001
+    weight_decay: 0.01 # super converge. decrease this when you increase steps.
+
+    val_freq: 3355 # exact num of samples in 1 epoch with pp
+    print_freq: 100
+
+    train_root: ./kitti_t_o/training
+    train_source: ./kitti_t_o/training/
+    train_link : ./data/train.txt
+    train_det: ./data/pp_train_dets.pkl
+
+    val_root: ./kitti_t_o/training
+    val_source: ./kitti_t_o/training/
+    val_link : ./data/val.txt
+    val_det : ./data/pp_val_dets.pkl
+
