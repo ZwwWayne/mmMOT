@@ -1,6 +1,6 @@
 common:
     model:
-        point_arch: v0
+        point_arch: v1
         point_len: 512
         appear_arch: vgg
         appear_len: 512
@@ -11,7 +11,6 @@ common:
         end_mode: avg
 
         affinity_op: minus_abs # multiply or addminus
-        affinity_arch: v0 # end is v1
         softmax_mode: dual_add
 
         score_arch: branch_cls 
