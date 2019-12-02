@@ -1,0 +1,11 @@
+*.swp
+*.pyc
+__pycache__
+*.tar
+checkpoint*
+events*
+log.txt
+*.ipynb*
+*.ipynb
+experiments/*
+data/*

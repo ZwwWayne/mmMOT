@@ -24,12 +24,41 @@ conda install pytorch torchvision -c pytorch
 Then follow the guide to install [py-motmetrics](https://github.com/cheind/py-motmetrics)
 Or you can directly run the following command to get all packages
 
-```base
+```bash
 conda install --file requirements.txt
-
 ```
 
 Then install follow the guide to install [SECOND](https://github.com/traveller59/second.pytorch) thus you can get the detection results.
+
+
+## Usage
+
+We provide several configs and scripts in the `experiments` directory. 
+
+To evaluate the pretrained models or the reimplemented models you can run command
+```bash
+python -u eval_seq.py --config ${work_path}/config.yaml \
+--load-path=${work_path}/${model} \
+--result-path=${work_path}/results \
+--result_sha=eval
+```
+The `--result_sha` option is used to distinguish different evaluation attempts.
+You can also simply run command like
+```
+sh ./experiments/pp_pv_40e_mul_A/eval.sh
+```
+
+To train the model on your own, you can run command
+```
+python -u main.py --config ${work_path}/config.yaml \
+--result-path=${work_path}/results 
+```
+You can also simply run command like
+```
+sh ./experiments/pp_pv_40e_mul_A/train.sh
+```
+
+**Note:** Both the train and eval scripts use srun as default, you can just comment them if you do not use srun.
 
 
 ## Pretrain Model
@@ -75,5 +104,5 @@ If you use this codebase or model in your research, please cite:
 
 ## Acknowledgement
 
-This code benefits a lot from [SECOND](https://github.com/traveller59/second.pytorch) and use the detection results provided by [MOTBeyondPixels](https://github.com/JunaidCS032/MOTBeyondPixels). The GHM loss implementation is from [GHM_Detection](https://github.com/libuyu/GHM_Detection)
+This code benefits a lot from [SECOND](https://github.com/traveller59/second.pytorch) and use the detection results provided by [MOTBeyondPixels](https://github.com/JunaidCS032/MOTBeyondPixels). The GHM loss implementation is from [GHM_Detection](https://github.com/libuyu/GHM_Detection).
 
