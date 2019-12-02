@@ -28,7 +28,7 @@ Or you can directly run the following command to get all packages
 conda install --file requirements.txt
 ```
 
-Then install follow the guide to install [SECOND](https://github.com/traveller59/second.pytorch) thus you can get the detection results.
+Then follow the guide to install [SECOND](https://github.com/traveller59/second.pytorch), we use the same environment as that for SECOND.
 
 
 ## Usage
