@@ -88,6 +88,10 @@ In the [paper](https://arxiv.org/abs/1909.03850), we train a [PointPillars](http
 
 The RRC detection are obtained from the [link](https://drive.google.com/file/d/1ZR1qEf2qjQYA9zALLl-ZXuWhqG9lxzsM/view) provided by [MOTBeyondPixels](https://github.com/JunaidCS032/MOTBeyondPixels). We use RRC detection for the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php).
 
+We provide the data split used in our paper in the `data` directory. You need to download and unzip the data from the [KITTI Tracking Benchmark](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) and put them in the `kitti_t_o` directory or any path you like.
+Do remember to change the path in the configs.
+
+
 
 ## Citation
 
