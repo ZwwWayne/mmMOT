@@ -524,10 +524,7 @@ def align_points(R, T, imu2velo, points):
 def proj_trans1(lon, lat):
     p1 = pyproj.Proj("epsg:4326") 
     p2 = pyproj.Proj("epsg:3857") 
-
-    x1, y1 = p1(lon, lat)
-    x2, y2 = pyproj.transform(p1, p2, x1, y1, radians=True)
-
+    x2, y2 = pyproj.transform(p1, p2, lon, lat)
     return x2, y2
 
 
