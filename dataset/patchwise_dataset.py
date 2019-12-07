@@ -135,7 +135,7 @@ class PatchwiseDataset(Dataset):
                 shift_bbox = bbox_jitter(frame['detection']['bbox'], self.bbox_jitter)
             else:
                 shift_bbox = frame['detection']['bbox']
-
+            frame['frame_info']['img_shape'] = np.array([img.size[1], img.size[0]])  # w, h -> h, w
             point_cloud = self.get_pointcloud(info=frame['frame_info'], point_path=frame['point_path'],
                                               dets=frame['detection'], shift_bbox=shift_bbox)
             pos.append(frame['frame_info']['pos'])

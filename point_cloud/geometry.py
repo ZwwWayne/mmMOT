@@ -81,8 +81,7 @@ def is_line_segment_cross(lines1, lines2):
         _ccw(A, B, C) != _ccw(A, B, D))
 
 
-@numba.jit(nopython=False)
-def surface_equ_3d_jit(polygon_surfaces):
+def surface_equ_3d(polygon_surfaces):
     # return [a, b, c], d in ax+by+cz+d=0
     # polygon_surfaces: [num_polygon, num_surfaces, num_points_of_polygon, 3]
     surface_vec = polygon_surfaces[:, :, :2, :] - polygon_surfaces[:, :, 1:3, :]
@@ -94,7 +93,27 @@ def surface_equ_3d_jit(polygon_surfaces):
     return normal_vec, -d
 
 
-@numba.jit(nopython=False)
+@numba.njit
+def _points_in_convex_polygon_3d_jit(points, polygon_surfaces, normal_vec, d, num_surfaces):
+    max_num_surfaces, max_num_points_of_surface = polygon_surfaces.shape[1:3]
+    num_points = points.shape[0]
+    num_polygons = polygon_surfaces.shape[0]
+    ret = np.ones((num_points, num_polygons), dtype=np.bool_)
+    sign = 0.0
+    for i in range(num_points):
+        for j in range(num_polygons):
+            for k in range(max_num_surfaces):
+                if k > num_surfaces[j]:
+                    break
+                sign = points[i, 0] * normal_vec[j, k, 0] \
+                     + points[i, 1] * normal_vec[j, k, 1] \
+                     + points[i, 2] * normal_vec[j, k, 2] + d[j, k]
+                if sign >= 0:
+                    ret[i, j] = False
+                    break
+    return ret
+
+
 def points_in_convex_polygon_3d_jit(points,
                                     polygon_surfaces,
                                     num_surfaces=None):
@@ -115,23 +134,10 @@ def points_in_convex_polygon_3d_jit(points,
     num_polygons = polygon_surfaces.shape[0]
     if num_surfaces is None:
         num_surfaces = np.full((num_polygons,), 9999999, dtype=np.int64)
-    normal_vec, d = surface_equ_3d_jit(polygon_surfaces[:, :, :3, :])
+    normal_vec, d = surface_equ_3d(polygon_surfaces[:, :, :3, :])
     # normal_vec: [num_polygon, max_num_surfaces, 3]
     # d: [num_polygon, max_num_surfaces]
-    ret = np.ones((num_points, num_polygons), dtype=np.bool_)
-    sign = 0.0
-    for i in range(num_points):
-        for j in range(num_polygons):
-            for k in range(max_num_surfaces):
-                if k > num_surfaces[j]:
-                    break
-                sign = points[i, 0] * normal_vec[j, k, 0] \
-                       + points[i, 1] * normal_vec[j, k, 1] \
-                       + points[i, 2] * normal_vec[j, k, 2] + d[j, k]
-                if sign >= 0:
-                    ret[i, j] = False
-                    break
-    return ret
+    return _points_in_convex_polygon_3d_jit(points, polygon_surfaces, normal_vec, d, num_surfaces)
 
 
 @numba.jit

@@ -522,9 +522,11 @@ def align_points(R, T, imu2velo, points):
 
 # wgs84->utm，
 def proj_trans1(lon, lat):
-    p1 = pyproj.Proj("epsg:4326") 
+    #p3 = pyproj.Proj("epsg:4326") 
+    p1 = pyproj.Proj(proj='utm',zone=10,ellps='WGS84', preserve_units=False)
     p2 = pyproj.Proj("epsg:3857") 
-    x2, y2 = pyproj.transform(p1, p2, lon, lat)
+    x1, y1 = p1(lon, lat)
+    x2, y2 = pyproj.transform(p1, p2, x1, y1, radians=True)
     return x2, y2
 
 

@@ -2,7 +2,8 @@ from collections import defaultdict
 
 import numpy as np
 
-from .box_np_ops import points_in_rbbox, box_camera_to_lidar, get_frustum_points
+from .box_np_ops import (points_in_rbbox, box_camera_to_lidar,
+                         get_frustum_points, remove_outside_points)
 
 
 
@@ -58,6 +59,9 @@ def read_and_prep_points(info, root_path, point_path, dets, use_frustum=False,
     rect = info['calib/R0_rect'].astype(np.float32)
     Trv2c = info['calib/Tr_velo_to_cam'].astype(np.float32)
     P2 = info['calib/P2'].astype(np.float32)
+    
+    # remove point cloud out side image, this might affect the performance
+    points = remove_outside_points(points, rect, Trv2c, P2, info["img_shape"])
 
     # remove the points that is outside the bboxes or frustum
     bbox_points = []

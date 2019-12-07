@@ -190,6 +190,7 @@ class TestSequence(Dataset):
             path =f"{self.root_dir}/image_02/{frame['image_path']}"
             img = Image.open(path)
             det_num = frame['detection']['bbox'].shape[0]
+            frame['frame_info']['img_shape'] = np.array([img.size[1], img.size[0]])  # w, h -> h, w
             point_cloud = self.get_pointcloud(info=frame['frame_info'], point_path=frame['point_path'],
                                               dets=frame['detection'], shift_bbox = frame['detection']['bbox'])
             pos.append(frame['frame_info']['pos'])
